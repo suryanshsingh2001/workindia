@@ -65,6 +65,17 @@ export const bookSeat = async (req: Request, res: Response): Promise<void> => {
   }
 
   try {
+    const train = await prisma.train.findUnique({
+      where: { id: trainId },
+      select: { availableSeats: true },
+    });
+
+    if (!train || train.availableSeats <= 0) {
+      res.status(400).send("No seats available");
+      return;
+    }
+
+
     await bookingQueue.add({ trainId, userId });
     res.status(201).send("Booking request received");
   } catch (error: any) {

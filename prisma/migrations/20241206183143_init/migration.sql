@@ -16,6 +16,7 @@ CREATE TABLE "Train" (
     "destination" TEXT NOT NULL,
     "totalSeats" INTEGER NOT NULL,
     "availableSeats" INTEGER NOT NULL,
+    "version" INTEGER NOT NULL DEFAULT 0,
 
     CONSTRAINT "Train_pkey" PRIMARY KEY ("id")
 );
