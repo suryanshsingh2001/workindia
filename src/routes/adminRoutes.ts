@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { addTrain } from '../controllers/adminController';
-import { verifyAdmin } from '../middlewares/authMiddleware';
+import { verifyAdmin, verifyRole } from '../middlewares/authMiddleware';
 
 const router = Router();
 
-router.post('/train', verifyAdmin, addTrain);
+router.post('/train', verifyRole("admin"), addTrain);
 
 export default router;

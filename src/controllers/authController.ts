@@ -29,7 +29,7 @@ export const registerUser = async (
             data: { username, password: hashedPassword, role },
         });
 
-        res.status(201).send({ message: "User created successfully", user });
+        res.status(200).send({ message: "User created successfully", user });
     } catch (error) {
         res.status(500).send("Internal server error");
     }
