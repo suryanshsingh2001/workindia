@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getSeatAvailability, bookSeat, getBookingDetails } from '../controllers/userController';
-import { verifyRole, verifyUser } from '../middlewares/authMiddleware';
+import { verifyRole } from '../middlewares/authMiddleware';
 
 const router = Router();
 

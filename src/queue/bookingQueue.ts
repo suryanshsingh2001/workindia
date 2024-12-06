@@ -3,6 +3,16 @@ import prisma from "../utils/prisma";
 
 const bookingQueue = new Queue("bookingQueue");
 
+/**
+ * Booking queue process function to book a seat on a train.
+ *
+ * @async
+ * @function
+ * @param {number} trainId - The unique identifier of the train to be updated.
+ * @param {object} train - The current train object containing its version.
+ * @returns {Promise<object>} The updated train record from the database.
+ * @throws {Error} If the update operation fails.
+ */
 bookingQueue.process(async (job) => {
   const { trainId, userId } = job.data;
 
