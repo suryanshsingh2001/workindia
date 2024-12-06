@@ -4,7 +4,7 @@ import { verifyUser } from '../middlewares/authMiddleware';
 
 const router = Router();
 
-router.get('/availability', verifyUser, getSeatAvailability);
+router.get('/availability', verifyUser , getSeatAvailability);
 router.post('/book', verifyUser, bookSeat);
 router.get('/booking/:id', verifyUser, getBookingDetails);
 
