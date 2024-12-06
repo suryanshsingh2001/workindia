@@ -8,28 +8,30 @@ generator client {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  username String   @unique
+  id       Int       @id @default(autoincrement())
+  username String    @unique
   password String
   role     String
   bookings Booking[]
 }
 
 model Train {
-  id            Int      @id @default(autoincrement())
-  name          String
-  source        String
-  destination   String
-  totalSeats    Int
+  id             Int    @id @default(autoincrement())
+  name           String
+  source         String
+  destination    String
+  totalSeats     Int
   availableSeats Int
-  bookings      Booking[]
+  version        Int    @default(0)
+
+  bookings Booking[]
 }
 
 model Booking {
-  id        Int    @id @default(autoincrement())
-  userId    Int
-  trainId   Int
+  id         Int   @id @default(autoincrement())
+  userId     Int
+  trainId    Int
   seatNumber Int
-  user      User   @relation(fields: [userId], references: [id])
-  train     Train  @relation(fields: [trainId], references: [id])
+  user       User  @relation(fields: [userId], references: [id])
+  train      Train @relation(fields: [trainId], references: [id])
 }
