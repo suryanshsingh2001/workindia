@@ -9,9 +9,19 @@ export const addTrain = async (req: Request, res: Response): Promise<void> => {
     return;
   }
 
-  const train = await prisma.train.create({
-    data: { name, source, destination, totalSeats, availableSeats: totalSeats },
-  });
+  try {
+    const train = await prisma.train.create({
+      data: {
+        name,
+        source,
+        destination,
+        totalSeats,
+        availableSeats: totalSeats,
+      },
+    });
 
-  res.status(201).send({ message: "Train added successfully", train });
+    res.status(201).send({ message: "Train added successfully", train });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server", error });
+  }
 };
