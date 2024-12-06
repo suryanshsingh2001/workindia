@@ -60,7 +60,7 @@ export const bookSeat = async (req: Request, res: Response): Promise<void> => {
       },
     });
 
-    res.status(201).send({ message: "Seat booked successfully", booking });
+    res.status(200).send({ message: "Seat booked successfully", booking });
   } catch (error) {
     res.status(500).send("Internal Server Error");
   }
@@ -73,6 +73,11 @@ export const getBookingDetails = async (
   try {
     const bookingId = req.params.id;
     const userId = req.user.id;
+
+    if (!bookingId) {
+      res.status(400).send("Please provide bookingId");
+      return;
+    }
 
     const booking = await prisma.booking.findFirst({
       where: { id: parseInt(bookingId), userId },
