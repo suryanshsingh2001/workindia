@@ -1,10 +1,17 @@
 import axios from "axios";
 
+/* 
+Add your Train ID and User Token here
+*/
 const BASE_URL = "http://localhost:3000";
-const USER_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3MzM1MDM1MzMsImV4cCI6MTczMzUwNzEzM30.XS12zO9wFAExjJpfzuGhqBznpJc3wgithGAgQwk4ghs"; // Replace with the actual user JWT token
-const TRAIN_ID = 4; // Replace with the actual train ID
+const TRAIN_ID = null;
+const USER_TOKEN = null;
+const NUM_REQUESTS = 10;
 
+/**
+ * Function to book a seat
+ 
+ * */
 const bookSeat = async () => {
   try {
     const response = await axios.post(
@@ -26,7 +33,21 @@ const bookSeat = async () => {
   }
 };
 
+/** 
+Function to test concurrent booking requests
+
+@param numRequests: number of concurrent booking requests to test
+
+@remarks 
+This function sends multiple concurrent booking requests to the server. To run this, run `npm run test` after adding your Train ID and User Token in the constants above.
+*/
 const testConcurrentBookings = async (numRequests: number) => {
+  if (!TRAIN_ID || !USER_TOKEN) {
+    throw new Error(
+        "Please add your Train ID and User Token in the constants in the file: src/test/testConcurrentBookings.ts"
+        );
+  
+  }
   const promises = [];
 
   for (let i = 0; i < numRequests; i++) {
@@ -39,4 +60,4 @@ const testConcurrentBookings = async (numRequests: number) => {
 };
 
 // Test with 10 concurrent booking requests
-testConcurrentBookings(10);
+testConcurrentBookings(NUM_REQUESTS);
